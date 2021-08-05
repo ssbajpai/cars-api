@@ -16,7 +16,7 @@ jobs:
         run: gradle build
       - run: ls /build/libs
       - name: upload the jar file
-        uses: actions/upload arctifct@v2
+        uses: actions/upload arctifact@v2
         with: 
           path: ./build/libs/
           retention-days: 5
