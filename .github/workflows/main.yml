@@ -16,10 +16,14 @@ jobs:
         run: gradle build
       - run: ls /build/libs
       - name: upload the jar file
-        uses: actions/upload artifact@v2
+        uses: actions/upload-artifact@v2
         with: 
           path: ./build/libs/
           retention-days: 5
+      - name: Running the Java clode
+        run: java -jar ./build/libs/car-api.jar
+      - name: Testing
+        run: curl http://localhost:8080/
           
       
         
