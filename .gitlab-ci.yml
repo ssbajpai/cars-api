@@ -1,0 +1,52 @@
+stages:
+  - build
+  - test
+  - upload
+
+image: openjdk:12-alpine
+
+build app:
+  stage: build
+  script:
+    - ./gradlew build
+  artifacts:
+    expire_in: 30 days
+    paths:
+      - ./build/libs/
+
+test app:
+  stage: test
+  before_script:
+    - apk --no-cache add curl
+  script:
+    - java -jar ./build/libs/cars-api.jar &
+    - sleep 30
+    - curl http://localhost:5000/actuator/health | grep "UP"
+
+gradelscan:
+  stage: test
+  script:
+    - ./gradlew pmdMain pmdTest
+  artifacts:
+    when: always
+    paths:
+      - build/reports/pmd
+
+unit test:
+  stage: test
+  script:
+    - ./gradlew test
+  artifacts:
+    when: always
+    paths:
+      - build/reports/tests
+    reports:
+      junit: build/test-results/test/*.xml
+
+
+upload artifact:
+  stage: upload
+  before_script:
+    - apk --no-cache add curl
+  script:
+    - curl -u $JFROGUSERNAME:$JFROGPASSWORD -T ./build/libs/cars-api.jar "https://nishanthkp123.jfrog.io/artifactory/default-generic-local/"
