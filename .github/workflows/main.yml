@@ -14,6 +14,13 @@ jobs:
         run: gradle -version
       - name: Gradel Build
         run: gradle build
-      - run: ls
+      - run: ls /build/libs
+      - name: upload the jar file
+        uses: actions/upload arctifct@v2
+        with: 
+          path: ./build/libs/
+          retention-days: 5
+          
+      
         
         
