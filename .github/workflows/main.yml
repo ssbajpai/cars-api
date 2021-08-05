@@ -14,7 +14,7 @@ jobs:
         run: gradle -version
       - name: Gradel Build
         run: gradle build
-      - run: ls /build/libs
+      - run: ls ./build/libs
       - name: upload the jar file
         uses: actions/upload-artifact@v2
         with: 
