@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Listing the files
         run: ls
-      - name: Building teh java code
-        run: gradlew build
+      - name: Building the java code with Gradle
+        run: ./gradlew build
         
         
