@@ -23,7 +23,7 @@ jobs:
       - name: Running the Java clode
         run: |
           java -jar ./build/libs/cars-api.jar &
-          sleep: 30
+          sleep 30
       - name: Testing
         run: curl http://localhost:5000/cars/1 | grep -i "ford"
           
