@@ -21,9 +21,9 @@ jobs:
           path: ./build/libs/
           retention-days: 5
       - name: Running the Java clode
-        run: java -jar ./build/libs/car-api.jar
+        run: java -jar ./build/libs/cars-api.jar
       - name: Testing
-        run: curl http://localhost:8080/
+        run: curl http://localhost:5000/
           
       
         
